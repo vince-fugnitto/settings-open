@@ -1,11 +1,17 @@
 import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
-	console.log('Congratulations, your extension "settings-open" is now active!');
-	let disposable = vscode.commands.registerCommand('ext.openSettings', () => {
+	const disposableCollection: vscode.Disposable[] = [];
+	disposableCollection.push(vscode.commands.registerCommand('ext.openSettings', () => {
 		vscode.commands.executeCommand('workbench.action.openSettings');
-	});
-	context.subscriptions.push(disposable);
+	}));
+	disposableCollection.push(vscode.commands.registerCommand('ext.openSettingsQuery', async () => {
+		const choice = await vscode.window.showInputBox({ placeHolder: 'Search Query' });
+		if (choice) {
+			vscode.commands.executeCommand('workbench.action.openSettings', choice);
+		}
+	}));
+	context.subscriptions.push(...disposableCollection);
 }
 
 export function deactivate() { }

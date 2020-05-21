@@ -11,7 +11,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:ext.openSettings"
+		"onCommand:ext.openSettings",
+		"onCommand:ext.openSettingsQuery"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -19,6 +20,10 @@
 			{
 				"command": "ext.openSettings",
 				"title": "Ext: Open Settings"
+			},
+			{
+				"command": "ext.openSettingsQuery",
+				"title": "Ext: Open Settings With Query"
 			}
 		]
 	},
